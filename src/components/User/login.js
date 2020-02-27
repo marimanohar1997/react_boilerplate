@@ -42,7 +42,7 @@ class Login extends React.Component{
           .catch(function (error) {
             console.log(error);
             if(error){
-                alert("Email or password is incorrect")
+                alert(error.response.data.error)
             }
           })}
     }
@@ -76,10 +76,9 @@ class Login extends React.Component{
                                 <input type="password" className="form-control" name="password" onChange={this.handleChange} required/>
                             </div>
                             <button className="btn btn-primary" onClick={this.submit}>Sign in</button><br/><br/>              
-                             <br/>
                         </form>
-                        <button className="btn btn-success" onClick={this.handleClick}>New User</button><br/><br/>
-                        <NavLink to={"/user/forgot_password"} className="btn btn-info">Forgot Password ?</NavLink>
+                        
+                        <NavLink to={"/user/forgot_password"} className="btn btn-warning">Forgot Password ?</NavLink>
                         </div>
                         <div className='col-md-3'></div>
                     </div>

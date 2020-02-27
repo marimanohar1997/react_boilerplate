@@ -76,7 +76,7 @@ class Home extends React.Component{
             <div className="container">
               <NavLink to={"/product/create/"} className="btn btn-primary">Create</NavLink>
                 <input type="text" id="myInput" onKeyUp={this.myFunction} style={{float: "right"}} placeholder="Search ..." title="Type in a name"></input>
-                <h4>Products</h4>
+                
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>
               <tr>

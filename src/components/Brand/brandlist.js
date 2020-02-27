@@ -14,7 +14,12 @@ class Brandlist extends React.Component{
       }
 
       componentDidMount(){
-        axios.get('http://localhost:3000/brands?id='+localStorage.getItem('user_id'))
+        const token = localStorage.getItem('token')
+        axios.get('http://localhost:3000/brands?id='+localStorage.getItem('user_id'),{
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        })
         .then(response => {
           console.log(response)
             this.setState({ product_list: response.data,user_id: localStorage.getItem('user_id') });
@@ -71,7 +76,9 @@ class Brandlist extends React.Component{
         return(
             <div className="container">
                 <NavLink to={"/brand/create/"} className="btn btn-primary">Create</NavLink>
-                <input type="text" id="myInput" onKeyUp={this.myFunction} placeholder="Search for names.." title="Type in a name"></input>
+                
+
+                <input type="text" id="myInput" onKeyUp={this.myFunction} placeholder="Search for names.." title="Type in a name" style={{float: "right"}}></input>
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>
               <tr>

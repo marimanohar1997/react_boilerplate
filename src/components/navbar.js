@@ -47,7 +47,7 @@ class Navbar extends React.Component{
                <li className="nav-item">
                  <Link to={'/contact/contactlist'} className="nav-link">Contact</Link>
                </li>
-               <i class="fa fa-sign-out" onClick={this.logout} style={{fontSize:"24px",position: "absolute",right: "40px",bottom: "20px"}}>logout</i>
+               <button onClick={this.logout} className="btn btn-danger" style={{position: "absolute",right: "10px"}}>Logout</button>
              </ul>
            </div>
          </nav> <br/>

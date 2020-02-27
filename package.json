@@ -1,7 +1,7 @@
 {
-  "name": "bare-react-app",
+  "name": "boilerplate-react-app",
   "version": "1.0.0",
-  "description": "A barebones react boilerplate",
+  "description": "A react boilerplate",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

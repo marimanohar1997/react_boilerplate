@@ -124,7 +124,6 @@ class Edit extends React.Component{
       axios.get('http://localhost:3000/product_list?id='+this.props.match.params.id)
       .then(response => {
             console.log(response);
-            debugger
             this.setState({ 
                 name: response.data.name,
                 price: response.data.price,

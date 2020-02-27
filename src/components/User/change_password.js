@@ -82,7 +82,7 @@ class ChangePassword extends React.Component{
             .catch(function (error) {
                 console.log(error);
                 if(error){
-                    alert("Link not valid or expired. Try generating a new link")
+                    alert(error.response.data.error)
                 }
               });
         }

@@ -160,9 +160,19 @@ onSubmit(e) {
   }
   else{
     axios.post('http://localhost:3000/products/', obj)
-    .then(res => console.log(res.data));
-    alert("Product created successfully")
-    window.location.href = '/home'
+    .then((response) => {
+      console.log(response);
+      if(response.status == 200){
+          alert("Product created successfully")
+          window.location.href = '/home'
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      if(error){
+        alert(error.response.data.error)
+      }
+    });
   }
 }
 

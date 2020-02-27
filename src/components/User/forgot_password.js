@@ -27,23 +27,25 @@ class ForgotPassword extends React.Component{
 
       onSubmit(e) {
         e.preventDefault();
+        if(this.validateForm() == ""){
+        }
+        else{
         axios.post('http://localhost:3000/password/forgot?email='+this.state.email)
           .then(function (response) {
             console.log(response);
             if (response.status == 200 ){
                 alert("Email sending successfully")
-            }
-            else{
-                alert("Email doesn't exist")
+                window.location.href = "/user/forgot_password" 
             }
         })
         .catch(function (error) {
             console.log(error);
             if(error){
-                alert("Email not present")
+                alert(error.response.data.error)
             }
           });
         }
+    }
 
     render(){
         return(
