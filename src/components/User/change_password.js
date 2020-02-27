@@ -4,13 +4,21 @@ import axios from 'axios'
 class ChangePassword extends React.Component{
     constructor(props){
         super(props);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangepassword = this.onChangepassword.bind(this);
         this.onChangenew_password = this.onChangenew_password.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             new_password: null,
-            password: null
+            password: null,
+            email: null
         }
+    }
+
+    onChangeEmail(e){
+        this.setState({
+            email: e.target.value
+            });
     }
 
         onChangepassword(e) {
@@ -25,13 +33,23 @@ class ChangePassword extends React.Component{
                     });
                 }    
             
-
+            componentDidMount()
+            {
+                this.setState({
+                    token : window.location.href
+                    });
+            }
 
 
       validateForm() {
+        var email = document.forms["myForm"]["email"].value;
         var password = document.forms["myForm"]["password"].value;
         var new_password = document.forms["myForm"]["new_password"].value;
-        if(password === ""){  
+        if(email === ""){  
+            alert("Email can't be empty");  
+            return false;  
+            }
+        else if(password === ""){  
           alert("New Password can't be empty");  
           return false;  
           }
@@ -44,25 +62,30 @@ class ChangePassword extends React.Component{
       onSubmit(e) {
         e.preventDefault();
         const obj = {
-            user_id : localStorage.getItem('user_id'),
+            email: this.state.email,
             password: this.state.password,
-            new_password: this.state.new_password
+            new_password: this.state.new_password,
+            token: this.state.token.split('/')[5]
         }
-        if(this.validateForm() == ""){
-            return false
-          }
+            if(this.validateForm() == ""){
+                return false
+            }
           else{
-          axios.post('http://localhost:3000/change_password',obj)
+          axios.post('http://localhost:3000/password/reset',obj)
           .then(function (response) {
-            console.log(response);
+            console.log("mari");
             if (response.status == 200){
                 alert("Password updated successfully")
                 window.location.href = '/user/change_password'
             }
-            else{
-                alert("New password and Re-enter password doesn't match")
-            }
-        })}
+            })
+            .catch(function (error) {
+                console.log(error);
+                if(error){
+                    alert("Link not valid or expired. Try generating a new link")
+                }
+              });
+        }
         }
 
     render(){
@@ -73,13 +96,18 @@ class ChangePassword extends React.Component{
                     <h2>Change Password</h2>
                 <form onSubmit={this.onSubmit} name="myForm">
                 <div className="form-group">
+                    <label>Email  </label>
+                    <input type="text" className="form-control" name="email" 
+                    onChange={this.onChangeEmail} />
+                </div>
+                <div className="form-group">
                     <label>New Password  </label>
-                    <input type="text" className="form-control" name="password" value={this.state.password}
+                    <input type="text" className="form-control" name="password" 
                     onChange={this.onChangepassword} />
                 </div>
                 <div className="form-group">
                     <label>Re-Enter your new Password  </label>
-                    <input type="text" className="form-control" name="new_password" value={this.state.new_password}
+                    <input type="text" className="form-control" name="new_password" 
                     onChange={this.onChangenew_password} />
                 </div>
                 <div className="form-group">

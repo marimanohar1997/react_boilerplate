@@ -27,16 +27,22 @@ class ForgotPassword extends React.Component{
 
       onSubmit(e) {
         e.preventDefault();
-          axios.get('http://localhost:3000/forgot_password_link_send?email='+this.state.email)
+        axios.post('http://localhost:3000/password/forgot?email='+this.state.email)
           .then(function (response) {
             console.log(response);
-            if (response.status == 200){
+            if (response.status == 200 ){
                 alert("Email sending successfully")
             }
             else{
                 alert("Email doesn't exist")
             }
         })
+        .catch(function (error) {
+            console.log(error);
+            if(error){
+                alert("Email not present")
+            }
+          });
         }
 
     render(){
@@ -47,7 +53,7 @@ class ForgotPassword extends React.Component{
                 <form onSubmit={this.onSubmit} name="myForm">
                 <div className="form-group">
                     <label>Enter your email  </label>
-                    <input type="text" className="form-control" name="email" value={this.state.email}
+                    <input type="text" className="form-control" name="email" 
                     onChange={this.onChangeemail} />
                 </div>
                 <div className="form-group">

@@ -1,21 +1,21 @@
 import React from 'react'
 import { BrowserRouter as Router,Link,Switch, Route,Redirect } from 'react-router-dom'
-import Brandlist from './Brand/brandlist';
-import BrandCreate from './Brand/create';
-import Login from './login';
-import Home from './home'
-import BrandEdit from './Brand/edit'
-import Edit from './Product/edit';
-import Create from './Product/create'
-import Delete from './Product/delete'
-import BrandDelete from './Brand/delete'
+import ForgotPassword from './User/forgot_password'
+import Login from './User/login';
+import ChangePassword from './User/change_password'
 import Register from './User/register'
+import ProductHome from './Product/home'
+import ProductEdit from './Product/edit'
+import ProductCreate from './Product/create'
+import ProductDelete from './Product/delete'
+import BrandEdit from './Brand/edit'
+import BrandDelete from './Brand/delete'
+import Brandlist from './Brand/brandlist'
+import BrandCreate from './Brand/create'
 import Contactlist from './Contact/contactlist'
 import ContactCreate from './Contact/create'
 import ContactEdit from './Contact/edit'
 import ContactDelete from './Contact/delete'
-import ForgotPassword from './User/forgot_password'
-import ChangePassword from './User/change_password'
 
 
 const isLoggedIn = ()=>{
@@ -47,19 +47,16 @@ class Navbar extends React.Component{
                <li className="nav-item">
                  <Link to={'/contact/contactlist'} className="nav-link">Contact</Link>
                </li>
-               <li className="nav-item">
-                 <Link to={'/user/change_password'} className="nav-link">Change Password</Link>
-               </li>
-               <i class="fa fa-sign-out" onClick={this.logout} style={{fontSize:"24px",position: "absolute",right: "40px",bottom: "20px"}}></i>
+               <i class="fa fa-sign-out" onClick={this.logout} style={{fontSize:"24px",position: "absolute",right: "40px",bottom: "20px"}}>logout</i>
              </ul>
            </div>
          </nav> <br/>
          <Switch>
-             <Route exact path='/home' component={ Home } />
+             <Route exact path='/home' component={ ProductHome } />
              <Route path='/user/register/' component={ Register } />
-             <Route path='/product/create' component={ Create } />
-             <Route path='/edit/:id' component={ Edit } />
-             <Route path='/delete/:id' component={ Delete } />
+             <Route path='/product/create' component={ ProductCreate } />
+             <Route path='/product/edit/:id' component={ ProductEdit } />
+             <Route path='/product/delete/:id' component={ ProductDelete } />
              <Route path='/brand/brandlist' component={ Brandlist } />
              <Route path='/brand/create/' component={ BrandCreate } />
              <Route path='/brand/edit/:id' component={ BrandEdit }/>
@@ -67,8 +64,7 @@ class Navbar extends React.Component{
              <Route path='/contact/contactlist' component={ Contactlist } />
              <Route path='/contact/create/' component={ ContactCreate } />
              <Route path='/contact/edit/:id' component={ ContactEdit }/>
-             <Route path='/contact/delete/:id' component={ ContactDelete }/>
-             <Route path='/user/change_password' component={ ChangePassword }/>
+             <Route path='/contact/delete/:id' component={ ContactDelete }/>  
              <Route path="*" to="" />
          </Switch>
        </div>
@@ -91,7 +87,8 @@ class Navbar extends React.Component{
       <Switch>
         <Route path='/user/register/' component={ Register } />
         <Route path='/login/' component={ Login } />
-        <Route path='/user/forgot_password/' component={ ForgotPassword } />
+        <Route path='/User/forgot_password' component={ ForgotPassword } />
+        <Route path='/User/change_password' component={ ChangePassword } />
       </Switch>
       </div>
       </Router>

@@ -45,8 +45,8 @@ class Home extends React.Component{
                      <td>{gender}</td>
                      <td>{specification}</td>
                      <td>{brand.name}</td>
-                     <td><NavLink to={"/edit/"+id} class='fas fa-edit' style={{fontSize:"25px"}}></NavLink></td>
-                     <td><NavLink to={"/delete/"+id} class='fa fa-trash-o' style={{fontSize:"25px"}}></NavLink></td>
+                     <td><NavLink to={"/product/edit/"+id} className="btn btn-success">Edit</NavLink></td>
+                     <td><NavLink to={"/product/delete/"+id} className="btn btn-primary">Delete</NavLink></td>
                     </tr>
                )
             })
@@ -73,8 +73,8 @@ class Home extends React.Component{
 
     render(){
         return(
-            <div>
-              <NavLink to={"/product/create/"} class="fa fa-plus-circle" style={{fontSize:"30px"}}></NavLink>
+            <div className="container">
+              <NavLink to={"/product/create/"} className="btn btn-primary">Create</NavLink>
                 <input type="text" id="myInput" onKeyUp={this.myFunction} style={{float: "right"}} placeholder="Search ..." title="Type in a name"></input>
                 <h4>Products</h4>
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">

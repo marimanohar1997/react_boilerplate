@@ -41,6 +41,9 @@ class Login extends React.Component{
           })
           .catch(function (error) {
             console.log(error);
+            if(error){
+                alert("Email or password is incorrect")
+            }
           })}
     }
 
@@ -48,11 +51,11 @@ class Login extends React.Component{
         var email = document.forms["myForm"]["email"].value;
         var password = document.forms["myForm"]["password"].value;
         if (email === "") {
-          alert("Email or Password is incorrect");
+          alert("Email can't be empty");
           return false;
         }
         else if(password === ""){  
-          alert("Email or Password is incorrect");  
+          alert("Password can't be empty");
           return false;  
           }
       }
@@ -65,17 +68,14 @@ class Login extends React.Component{
                         <div className='col-md-6'>
                         <form onSubmit={this.submit} name="myForm">
                             <div className="form-group">
-                            <label>Email
-                                <input type="text" className="form-control" name="email" onChange={this.handleChange} required/>
-                            </label>
+                            <label>Email</label>
+                            <input type="text" className="form-control" name="email" onChange={this.handleChange} required/>
                             </div>
                             <div className="form-group">
-                                <label>Password
-                                    <input type="password" className="form-control" name="password" onChange={this.handleChange} required/>
-                                </label>
+                                <label>Password</label>
+                                <input type="password" className="form-control" name="password" onChange={this.handleChange} required/>
                             </div>
-                            <button className="btn btn-primary" onClick={this.submit}>Login</button><br/><br/>              
-                            
+                            <button className="btn btn-primary" onClick={this.submit}>Sign in</button><br/><br/>              
                              <br/>
                         </form>
                         <button className="btn btn-success" onClick={this.handleClick}>New User</button><br/><br/>
