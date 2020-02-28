@@ -22,6 +22,8 @@ class Home extends React.Component{
           })
           .catch(function (error) {
             console.log(error);
+            localStorage.clear()
+            window.location.href = '/login/'
           })
       }
 
@@ -71,7 +73,9 @@ class Home extends React.Component{
     render(){
         return(
             <div className="container">
+              <h3 className="title_header">Products  </h3>
               <NavLink to={"/product/create/"} className="btn btn-primary">Create</NavLink>
+                
                 <input type="text" id="myInput" onKeyUp={this.myFunction} style={{float: "right"}} placeholder="Search ..." title="Type in a name"></input>
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>

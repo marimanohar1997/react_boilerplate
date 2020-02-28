@@ -16,6 +16,7 @@ import Contactlist from './Contact/contactlist'
 import ContactCreate from './Contact/create'
 import ContactEdit from './Contact/edit'
 import ContactDelete from './Contact/delete'
+import PrivateRoute from './privateroute'
 
 
 const isLoggedIn = ()=>{

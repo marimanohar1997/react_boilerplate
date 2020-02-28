@@ -66,7 +66,7 @@ class ChangePassword extends React.Component{
             if(this.state.password == this.state.new_password){
                 axios.post('http://localhost:3000/password/reset',obj)
                 .then(function (response) {
-                    console.log("mari");
+                    console.log(response);
                     if (response.status == 200){
                         alert("Password updated successfully")
                         window.location.href = '/login/'
@@ -80,7 +80,7 @@ class ChangePassword extends React.Component{
                     });
                 }
                 else{
-                    alert("Both password's not match")
+                    alert("New password and Re-enter password doesn't match")
                 }
             }
         }

@@ -69,9 +69,9 @@ class Brandlist extends React.Component{
     render(){
         return(
             <div className="container">
+              <h3 className="title_header">Contacts  </h3>
                 <NavLink to={"/contact/create/"} className="btn btn-primary">Create</NavLink>
                 <input type="text" id="myInput" onKeyUp={this.myFunction} style={{float: "right"}} placeholder="Search for names.." title="Type in a name"></input>
-                  
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>
               <tr>

@@ -13,7 +13,7 @@ class Brandlist extends React.Component{
         user_id: ''
         };
       }
-
+  
       componentDidMount(){
         api.get('brands?id='+localStorage.getItem('user_id'))
         .then(response => {
@@ -71,25 +71,24 @@ class Brandlist extends React.Component{
     render(){
         return(
             <div className="container">
+              <h3 className="title_header">Brands  </h3>
                 <NavLink to={"/brand/create/"} className="btn btn-primary">Create</NavLink>
-                
-
                 <input type="text" id="myInput" onKeyUp={this.myFunction} placeholder="Search for names.." title="Type in a name" style={{float: "right"}}></input>
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>
-              <tr>
-                <th>Name</th>
-                <th>brand_type</th>
-                <th>description</th>   
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-                  {this.renderTableData()}
-            </tbody>
-         </table>   
-   </div>
+                  <tr>
+                    <th>Name</th>
+                    <th>brand_type</th>
+                    <th>description</th>   
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      {this.renderTableData()}
+                </tbody>
+                </table>   
+            </div>
 
 
         );
