@@ -159,7 +159,7 @@ onSubmit(e) {
     return false
   }
   else{
-    axios.post('http://localhost:3000/products/', obj)
+    axios.post('http://localhost:3000/product_create/', obj)
     .then((response) => {
       console.log(response);
       if(response.status == 200){
@@ -178,7 +178,12 @@ onSubmit(e) {
 
 componentDidMount(){
   let tempOptions = []
-  axios.get("http://localhost:3000/brands/?id="+localStorage.getItem('user_id'))
+  const token = localStorage.getItem('token')
+  axios.get("http://localhost:3000/brands/?id="+localStorage.getItem('user_id'),{
+    headers: {
+      Authorization: 'Bearer ' + token
+    }
+  })
     .then(res => {
       console.log(res)
       res.data.map(i => tempOptions.push({"value":i.id, "label":i.name}))

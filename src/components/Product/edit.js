@@ -14,7 +14,6 @@ class Edit extends React.Component{
         this.onChangegender    = this.onChangegender.bind(this);
         this.onChangespecification    = this.onChangespecification.bind(this);
         this.onChangediscount    = this.onChangediscount.bind(this);
-        this.onChangecategory   = this.onChangecategory.bind(this);
         this.onChangeoriginal_price    = this.onChangeoriginal_price.bind(this);
         this.onChangeselling_price    = this.onChangeselling_price.bind(this);
         this.onChangeuser_id    = this.onChangeuser_id.bind(this);
@@ -103,15 +102,18 @@ class Edit extends React.Component{
       })
     }
 
-
-      handleChange = selectedOption => {
+    handleChange = selectedOption => {
       this.setState({ selectedOption });
-      console.log(`Option selected:`, selectedOption);
     };
 
     componentWillMount(){
       let tempOptions = []
-      axios.get("http://localhost:3000/brands/")
+      const token = localStorage.getItem('token')
+      axios.get("http://localhost:3000/brands/",{
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
         .then(res => {
           console.log(res)
           res.data.map(i => tempOptions.push({"value":i.id, "label":i.name}))
@@ -121,7 +123,12 @@ class Edit extends React.Component{
 
 
     componentDidMount(){
-      axios.get('http://localhost:3000/product_list?id='+this.props.match.params.id)
+      const token = localStorage.getItem('token')
+      axios.get('http://localhost:3000/product_list?id='+this.props.match.params.id,{
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
       .then(response => {
             console.log(response);
             this.setState({ 
@@ -146,6 +153,7 @@ class Edit extends React.Component{
    
     onSubmit(e) {
       e.preventDefault();
+      const token = localStorage.getItem('token')
       const obj = {
         name: this.state.name,
         price: this.state.price,
@@ -160,7 +168,11 @@ class Edit extends React.Component{
         user_id: localStorage.getItem('user_id'),
         brand_id: this.state.selectedOption.value
       };
-      axios.post('http://localhost:3000/product_update?id='+this.props.match.params.id, obj)
+      axios.post('http://localhost:3000/product_update?id='+this.props.match.params.id,obj,{
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
       .then( (response) => {
         console.log(response);
         this.props.history.push({
@@ -236,11 +248,6 @@ class Edit extends React.Component{
                             <option value="slim fit">slim fit</option>
                             <option value="normal">normal</option>
                           </select>
-                        </div>
-                        <div className="form-group">
-                            <label>category</label>
-                            <input type="text" className="form-control" value={this.state.category}
-                            onChange={this.onChangecategory} />
                         </div>
                         <div className="form-group">
                             <label>Category name</label>

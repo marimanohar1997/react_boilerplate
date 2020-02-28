@@ -21,26 +21,18 @@ class ChangePassword extends React.Component{
             });
     }
 
-        onChangepassword(e) {
-            this.setState({
-                password: e.target.value
-                });
-            }    
+    onChangepassword(e) {
+        this.setState({
+            password: e.target.value
+            });
+    }        
         
-            onChangenew_password(e) {
-                this.setState({
-                    new_password: e.target.value
-                    });
-                }    
+    onChangenew_password(e) {
+        this.setState({
+            new_password: e.target.value
+            });
+    }            
             
-            componentDidMount()
-            {
-                this.setState({
-                    token : window.location.href
-                    });
-            }
-
-
       validateForm() {
         var email = document.forms["myForm"]["email"].value;
         var password = document.forms["myForm"]["password"].value;
@@ -70,22 +62,27 @@ class ChangePassword extends React.Component{
             if(this.validateForm() == ""){
                 return false
             }
-          else{
-          axios.post('http://localhost:3000/password/reset',obj)
-          .then(function (response) {
-            console.log("mari");
-            if (response.status == 200){
-                alert("Password updated successfully")
-                window.location.href = '/user/change_password'
-            }
-            })
-            .catch(function (error) {
-                console.log(error);
-                if(error){
-                    alert(error.response.data.error)
+            else{
+            if(this.state.password == this.state.new_password){
+                axios.post('http://localhost:3000/password/reset',obj)
+                .then(function (response) {
+                    console.log("mari");
+                    if (response.status == 200){
+                        alert("Password updated successfully")
+                        window.location.href = '/login/'
+                    }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                        if(error){
+                            alert(error.response.data.error)
+                        }
+                    });
                 }
-              });
-        }
+                else{
+                    alert("Both password's not match")
+                }
+            }
         }
 
     render(){

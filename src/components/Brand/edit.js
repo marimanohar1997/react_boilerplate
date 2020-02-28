@@ -31,7 +31,12 @@ class Edit extends React.Component{
         });
       }
       componentDidMount(){
-        axios.get('http://localhost:3000/brand_list?id='+this.props.match.params.id)
+        const token = localStorage.getItem('token')
+        axios.get('http://localhost:3000/brand_list?id='+this.props.match.params.id,{
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        })
         .then(response => {
               console.log(response);
               this.setState({ 
@@ -52,10 +57,25 @@ class Edit extends React.Component{
           brand_type: this.state.brand_type,
           description: this.state.description
         };
-          axios.post('http://localhost:3000/brand_update/?id='+this.props.match.params.id,obj)
-            .then(res => console.log(res.data));
-            alert("brand updated successfully")
-            window.location.href = '/brand/brandlist'
+        const token = localStorage.getItem('token')
+          axios.post('http://localhost:3000/brand_update/?id='+this.props.match.params.id,obj,{
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+          })
+          .then(function (response) {
+            console.log(response);
+            if (response.status == 200){
+              alert("Brand Updated Successfully")
+              window.location.href = '/brand/brandlist'
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+            if(error){
+              alert(error.response.data.error)
+            }
+          });
       }
 
 

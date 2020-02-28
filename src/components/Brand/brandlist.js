@@ -31,7 +31,7 @@ class Brandlist extends React.Component{
 
       delete() {
         axios.post('http://localhost:3000/brand_delete/?id='+this.state.product_list[0].id)
-        window.location.href = "/brand/brandlist";
+        window.location.href = "/home";
       }
 
       myFunction(){

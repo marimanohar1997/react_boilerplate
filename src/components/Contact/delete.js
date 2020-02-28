@@ -3,10 +3,19 @@ import axios from 'axios'
 
 
 class Delete extends React.Component{
-    componentDidMount(){
+    componentWillMount(){
+        const token = localStorage.getItem('token')
         axios.post('http://localhost:3000/contact_delete?id='+this.props.match.params.id)
-        alert("Contact successfully deleted")
-        window.location.href = '/contact/contactlist'
+        .then(function (response) {
+            console.log(response);
+            if(response.status == 204){
+                alert("Contact successfully deleted")
+                window.location.href = '/contact/contactlist'
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       }
     render(){
         return(

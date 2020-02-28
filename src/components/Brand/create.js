@@ -41,11 +41,25 @@ class BrandCreate extends React.Component{
         if(this.validateForm() == ""){
         }
         else{
-          axios.post('http://localhost:3000/brands/',obj)
+          const token = localStorage.getItem('token')
+          axios.post('http://localhost:3000/brand_create/',obj,{
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+          })
           .then(function (response) {
             console.log(response);
-        })
-            window.location.href = "/brand/brandlist"
+            if(response.status == 200){
+              alert("Brand Created")
+              window.location.href = '/brand/brandlist'
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+            if(error){
+              alert("Brand not created")
+            }
+          });
           }
         }
 
@@ -64,12 +78,10 @@ class BrandCreate extends React.Component{
 
 
 
-
-
     render(){
         return(
-<div className="container">
-  <div className="row">
+  <div className="container">
+    <div className="row">
         <div className='col-md-3'></div>
         <div className='col-md-6'>
         <div style={{marginTop: 10}}>

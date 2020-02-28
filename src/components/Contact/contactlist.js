@@ -6,7 +6,6 @@ import {  NavLink } from "react-router-dom";
 class Brandlist extends React.Component{
     constructor(props) {
         super(props);
-        this.delete = this.delete.bind(this);
         this.state = {
         product_list: [],
         user_id: ''
@@ -27,11 +26,6 @@ class Brandlist extends React.Component{
           .catch(function (error) {
             console.log(error);
           })
-      }
-
-      delete() {
-        axios.post('http://localhost:3000/contact_delete/?id='+this.state.product_list[0].id)
-        window.location.href = "/brand/brandlist";
       }
 
       myFunction(){
@@ -68,7 +62,7 @@ class Brandlist extends React.Component{
                      <td>{description}</td>
                      <td>{pincode}</td>
                      <td><NavLink to={"/contact/edit/"+id} className="btn btn-success">Edit</NavLink></td>
-                     <td><NavLink to={"/contact/delete/"+id} className="btn btn-primary">Delete</NavLink></td>
+                     <td><NavLink to={"/contact/delete/"+id} className="btn btn-primary" >Delete</NavLink></td>
                     </tr>
                )
             })

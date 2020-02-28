@@ -65,10 +65,25 @@ class BrandCreate extends React.Component{
         if(this.validateForm() == ""){
         }
         else{
-          axios.post('http://localhost:3000/contacts/',obj)
-            .then(res => console.log(res.data));
-            alert("contact created successfully")
-            window.location.href = "/contact/contactlist"
+          const token = localStorage.getItem('token')
+          axios.post('http://localhost:3000/contact_create/',obj,{
+            headers: {
+              Authorization: 'Bearer ' + token
+            }
+          })
+          .then(function (response) {
+            console.log(response);
+            if(response.status == 200){
+              alert("Contact created successfully")
+              window.location.href = "/contact/contactlist"
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+            if(error){
+              alert(error.response.data.error)
+            }
+          });
           }
         }
 
