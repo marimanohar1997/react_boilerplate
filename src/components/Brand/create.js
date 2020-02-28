@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {api} from '../../api'
 
 class BrandCreate extends React.Component{
     constructor(props){
@@ -41,12 +42,7 @@ class BrandCreate extends React.Component{
         if(this.validateForm() == ""){
         }
         else{
-          const token = localStorage.getItem('token')
-          axios.post('http://localhost:3000/brand_create/',obj,{
-            headers: {
-              Authorization: 'Bearer ' + token
-            }
-          })
+          api.post('brand_create',obj)
           .then(function (response) {
             console.log(response);
             if(response.status == 200){

@@ -65,12 +65,7 @@ class BrandCreate extends React.Component{
         if(this.validateForm() == ""){
         }
         else{
-          const token = localStorage.getItem('token')
-          axios.post('http://localhost:3000/contact_create/',obj,{
-            headers: {
-              Authorization: 'Bearer ' + token
-            }
-          })
+          api.post('contact_create',obj)
           .then(function (response) {
             console.log(response);
             if(response.status == 200){

@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
+import {api} from '../../api'
 
 class Edit extends React.Component{
     constructor(props) {
@@ -108,12 +109,7 @@ class Edit extends React.Component{
 
     componentWillMount(){
       let tempOptions = []
-      const token = localStorage.getItem('token')
-      axios.get("http://localhost:3000/brands/",{
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
+      api.get("brands")
         .then(res => {
           console.log(res)
           res.data.map(i => tempOptions.push({"value":i.id, "label":i.name}))
@@ -123,12 +119,7 @@ class Edit extends React.Component{
 
 
     componentDidMount(){
-      const token = localStorage.getItem('token')
-      axios.get('http://localhost:3000/product_list?id='+this.props.match.params.id,{
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
+      api.get('product_list?id='+this.props.match.params.id)
       .then(response => {
             console.log(response);
             this.setState({ 
@@ -168,11 +159,7 @@ class Edit extends React.Component{
         user_id: localStorage.getItem('user_id'),
         brand_id: this.state.selectedOption.value
       };
-      axios.post('http://localhost:3000/product_update?id='+this.props.match.params.id,obj,{
-        headers: {
-          Authorization: 'Bearer ' + token
-        }
-      })
+      api.post('product_update?id='+this.props.match.params.id,obj)
       .then( (response) => {
         console.log(response);
         this.props.history.push({

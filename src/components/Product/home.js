@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  NavLink } from "react-router-dom";
+import {api} from '../../api';
+
 
 class Home extends React.Component{
     constructor(props) {
@@ -13,12 +15,7 @@ class Home extends React.Component{
       }
 
       componentDidMount(){
-        const token = localStorage.getItem('token')
-        axios.get('http://localhost:3000/user_products?id='+localStorage.getItem('user_id'),{
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
+        api.get('user_products?id='+localStorage.getItem('user_id'))
         .then(response => {
           console.log(response)
             this.setState({ product_list: response.data,user_id: localStorage.getItem('user_id') });
@@ -76,7 +73,6 @@ class Home extends React.Component{
             <div className="container">
               <NavLink to={"/product/create/"} className="btn btn-primary">Create</NavLink>
                 <input type="text" id="myInput" onKeyUp={this.myFunction} style={{float: "right"}} placeholder="Search ..." title="Type in a name"></input>
-                
                 <table className="table table-striped" style={{ marginTop: 20 }} id="myTable">
                 <thead>
               <tr>

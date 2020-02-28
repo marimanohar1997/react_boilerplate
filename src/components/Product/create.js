@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Select from 'react-select';
+import {api} from '../../api'
 
 class Create extends React.Component{
   constructor(props) {
@@ -159,7 +160,7 @@ onSubmit(e) {
     return false
   }
   else{
-    axios.post('http://localhost:3000/product_create/', obj)
+    api.post('product_create', obj)
     .then((response) => {
       console.log(response);
       if(response.status == 200){
@@ -179,7 +180,7 @@ onSubmit(e) {
 componentDidMount(){
   let tempOptions = []
   const token = localStorage.getItem('token')
-  axios.get("http://localhost:3000/brands/?id="+localStorage.getItem('user_id'),{
+  api.get("brands/?id="+localStorage.getItem('user_id'),{
     headers: {
       Authorization: 'Bearer ' + token
     }

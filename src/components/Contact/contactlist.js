@@ -2,6 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  NavLink } from "react-router-dom";
+import {api} from '../../api'
+
 
 class Brandlist extends React.Component{
     constructor(props) {
@@ -13,12 +15,7 @@ class Brandlist extends React.Component{
       }
 
       componentDidMount(){
-        const token = localStorage.getItem('token')
-        axios.get('http://localhost:3000/contact_list',{
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
+        api.get('contact_list')
         .then(response => {
           console.log(response)
             this.setState({ product_list: response.data});

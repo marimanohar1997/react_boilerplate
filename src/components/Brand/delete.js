@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 import {  NavLink } from "react-router-dom";
-
+import {api} from '../../api'
 
 class Delete extends React.Component{
     componentDidMount(){
-        axios.post('http://localhost:3000/brand_delete?id='+this.props.match.params.id)
+        api.post('brand_delete?id='+this.props.match.params.id)
         .then(function (response) {
             console.log(response);
             if(response.status == 204){

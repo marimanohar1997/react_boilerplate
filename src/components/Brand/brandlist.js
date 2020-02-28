@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  NavLink } from "react-router-dom";
+import {api} from '../../api'
 
 class Brandlist extends React.Component{
     constructor(props) {
@@ -14,12 +15,7 @@ class Brandlist extends React.Component{
       }
 
       componentDidMount(){
-        const token = localStorage.getItem('token')
-        axios.get('http://localhost:3000/brands?id='+localStorage.getItem('user_id'),{
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
+        api.get('brands?id='+localStorage.getItem('user_id'))
         .then(response => {
           console.log(response)
             this.setState({ product_list: response.data,user_id: localStorage.getItem('user_id') });
@@ -30,7 +26,7 @@ class Brandlist extends React.Component{
       }
 
       delete() {
-        axios.post('http://localhost:3000/brand_delete/?id='+this.state.product_list[0].id)
+        api.post('brand_delete/?id='+this.state.product_list[0].id)
         window.location.href = "/home";
       }
 

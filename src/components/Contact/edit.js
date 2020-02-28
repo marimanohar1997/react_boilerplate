@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import {api} from '../../api'
 
 class Edit extends React.Component{
     constructor(props){
@@ -53,12 +54,7 @@ class Edit extends React.Component{
     }
 
       componentDidMount(){
-        const token = localStorage.getItem('token')
-        axios.get('http://localhost:3000/find_contact?id='+this.props.match.params.id,{
-          headers: {
-            Authorization: 'Bearer ' + token
-          }
-        })
+        api.get('find_contact?id='+this.props.match.params.id)
         .then(response => {
               console.log(response);
               this.setState({ 
@@ -85,12 +81,7 @@ class Edit extends React.Component{
           pincode: this.state.pincode,
           description: this.state.description
         };
-          const token = localStorage.getItem('token')
-          axios.post('http://localhost:3000/contact_update/?id='+this.props.match.params.id,obj,{
-            headers: {
-              Authorization: 'Bearer ' + token
-            }
-          })
+          api.post('contact_update/?id='+this.props.match.params.id,obj)
           .then(function (response) {
             console.log(response);
             if(response.status == 200){

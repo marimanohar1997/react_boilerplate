@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
+import {api} from '../../api'
 
 
 class Delete extends React.Component{
     componentWillMount(){
-        const token = localStorage.getItem('token')
-        axios.post('http://localhost:3000/contact_delete?id='+this.props.match.params.id)
+        api.post('contact_delete?id='+this.props.match.params.id)
         .then(function (response) {
             console.log(response);
             if(response.status == 204){
