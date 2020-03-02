@@ -11,7 +11,8 @@ class ChangePassword extends React.Component{
         this.state = {
             new_password: null,
             password: null,
-            email: null
+            email: null,
+            token: window.location.href,
         }
     }
 
